@@ -10,6 +10,8 @@ int main(void) {
 
     printf("%s", (char *)s->data);
 
+    racs_result_destroy(res);
+    racs_client_close(client);
 
     return 0;
 }

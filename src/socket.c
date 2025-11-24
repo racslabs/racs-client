@@ -89,3 +89,7 @@ size_t racs_recv(racs_conn *conn, racs_memstream *memstream, size_t len) {
     return memstream->pos;
 }
 
+void racs_conn_close(racs_conn *conn) {
+    close(conn->fd);
+}
+

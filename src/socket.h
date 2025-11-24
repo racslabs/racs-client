@@ -26,5 +26,6 @@ size_t racs_recv(racs_conn *conn, racs_memstream *memstream, size_t len);
 
 void racs_len_prefix(const racs_conn *conn, size_t *len);
 
+void racs_conn_close(racs_conn *conn);
 
 #endif //RACS_CONN_H

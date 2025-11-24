@@ -264,3 +264,34 @@ racs_result *racs_unpack(char *data, size_t size) {
 
     return NULL;
 }
+
+void racs_result_destroy(racs_result *result) {
+    switch (result->type) {
+        case RACS_TYPE_STR:
+        case RACS_TYPE_INT:
+        case RACS_TYPE_FLOAT:
+        case RACS_TYPE_ERROR:
+        case RACS_TYPE_BOOL:
+        case RACS_TYPE_U8VEC:
+        case RACS_TYPE_S8VEC:
+        case RACS_TYPE_U16VEC:
+        case RACS_TYPE_S16VEC:
+        case RACS_TYPE_U32VEC:
+        case RACS_TYPE_S32VEC:
+        case RACS_TYPE_F32VEC:
+        case RACS_TYPE_C64VEC:
+            free(result->data);
+            break;
+        case RACS_TYPE_LIST: {
+            racs_result ** r = result->data;
+
+            for (size_t i = 0; i < result->size; i++)
+                racs_result_destroy(r[i]);
+
+            free(result->data);
+        }
+            break;
+        case RACS_TYPE_NULL:
+            break;
+    }
+}

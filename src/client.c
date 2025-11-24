@@ -20,3 +20,7 @@ racs_result *racs_client_execute(racs_client *client, const char *command) {
 
     return racs_unpack((char *)memstream.data, memstream.pos);
 }
+
+void racs_client_close(racs_client *client) {
+    racs_conn_close(&client->conn);
+}

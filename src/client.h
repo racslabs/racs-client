@@ -13,4 +13,6 @@ racs_client *racs_client_open(const char *host, int port);
 
 racs_result *racs_client_execute(racs_client *client, const char *command);
 
+void racs_client_close(racs_client *client);
+
 #endif //RACS_CLIENT_H

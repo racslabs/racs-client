@@ -65,4 +65,6 @@ racs_result *racs_unpack_c64v(msgpack_object *obj);
 
 char *racs_unpack_type(msgpack_object *obj);
 
+void racs_result_destroy(racs_result *result);
+
 #endif //RACS_UNPACK_H

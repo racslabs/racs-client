@@ -23,6 +23,8 @@ add_executable(racs_client main.c
         src/export.h
         src/unpack.h
         src/unpack.c
+        src/client.h
+        src/client.c
 )
 
 target_link_libraries(racs_client ${MSGPACK_LIBRARIES})

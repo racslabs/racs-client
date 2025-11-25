@@ -37,6 +37,29 @@ racs_uint8 *racs_frame_write(racs_frame *frame) {
     return buf;
 }
 
+void racs_send_frame(racs_conn *conn, racs_frame *frame) {
+    racs_uint8 *block = racs_frame_write(frame);
+
+    racs_send(conn, (char *)block, 34 + frame->header.block_size);
+    free(block);
+
+    size_t len;
+    racs_len_prefix(conn, &len);
+
+    racs_memstream memstream;
+    racs_memstream_init(&memstream);
+
+    racs_recv(conn, &memstream, len);
+
+    racs_result *result = racs_unpack((char *)memstream.data, memstream.pos);
+    free(memstream.data);
+
+    if (result->type == RACS_TYPE_ERROR) {
+        perror(result->data);
+        racs_result_destroy(result);
+    }
+}
+
 
 
 

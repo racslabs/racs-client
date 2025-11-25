@@ -1,11 +1,13 @@
 
-#ifndef RACS_STREAM_H
-#define RACS_STREAM_H
+#ifndef RACS_FRAME_H
+#define RACS_FRAME_H
 
 #include "uuid.h"
 #include "murmur3.h"
 #include "crc32c.h"
 #include "bytes.h"
+#include "socket.h"
+#include "unpack.h"
 
 typedef struct {
     char chunk_id[3];
@@ -28,4 +30,8 @@ void racs_frame_header_init(racs_frame_header *header, const char *stream_id);
 
 void racs_frame_set_block(racs_frame *frame, racs_uint8 *block, racs_uint16 size);
 
-#endif //RACS_STREAM_H
+racs_uint8 *racs_frame_write(racs_frame *frame);
+
+void racs_send_frame(racs_conn *conn, racs_frame *frame);
+
+#endif //RACS_FRAME_H

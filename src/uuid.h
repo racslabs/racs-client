@@ -1,6 +1,3 @@
-//
-// Created by corbin on 11/24/25.
-//
 
 #ifndef RACS_UUID_H
 #define RACS_UUID_H
@@ -15,7 +12,6 @@
 #endif
 
 #include <string.h>
-
 
 typedef racs_uint8 racs_uuid [16];
 

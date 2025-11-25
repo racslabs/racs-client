@@ -2,9 +2,7 @@
 #ifndef RACS_CLIENT_H
 #define RACS_CLIENT_H
 
-#include "socket.h"
-#include "unpack.h"
-#include <uuid/uuid.h>
+#include "frame.h"
 
 typedef struct {
     racs_conn conn;
@@ -13,6 +11,8 @@ typedef struct {
 racs_client *racs_client_open(const char *host, int port);
 
 racs_result *racs_client_execute(racs_client *client, const char *command);
+
+void racs_client_stream(racs_client *client, const char *stream_id, racs_uint16 chunk_size, racs_int32 *data, size_t size);
 
 void racs_client_close(racs_client *client);
 

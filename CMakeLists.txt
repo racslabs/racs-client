@@ -10,8 +10,12 @@ set(RACS_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 find_package(Msgpack)
+find_package(UUID)
 
-include_directories(${MSGPACK_INCLUDE_DIRS})
+include_directories(
+        ${MSGPACK_INCLUDE_DIRS}
+        ${UUID_INCLUDE_DIRS}
+)
 
 add_executable(racs_client main.c
         src/socket.h
@@ -34,6 +38,11 @@ add_executable(racs_client main.c
         src/uuid.c
         src/frame.c
         src/bytes.h
+        src/stream.h
+        src/stream.c
 )
 
-target_link_libraries(racs_client ${MSGPACK_LIBRARIES})
+target_link_libraries(racs_client
+        ${MSGPACK_LIBRARIES}
+        ${UUID_LIBRARIES}
+)

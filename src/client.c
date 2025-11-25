@@ -1,5 +1,7 @@
 #include "client.h"
 
+#include "stream.h"
+
 racs_client *racs_client_open(const char *host, int port) {
     racs_client *client = malloc(sizeof(racs_client));
 
@@ -18,7 +20,14 @@ racs_result *racs_client_execute(racs_client *client, const char *command) {
 
     racs_recv(&client->conn, &memstream, len);
 
-    return racs_unpack((char *)memstream.data, memstream.pos);
+    racs_result *result = racs_unpack((char *)memstream.data, memstream.pos);
+    free(memstream.data);
+
+    return result;
+}
+
+void racs_client_stream(racs_client *client, const char *stream_id, racs_uint16 chunk_size, racs_int32 *data, size_t size) {
+    racs_stream(&client->conn, stream_id, chunk_size, data, size);
 }
 
 void racs_client_close(racs_client *client) {

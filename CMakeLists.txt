@@ -25,6 +25,15 @@ add_executable(racs_client main.c
         src/unpack.c
         src/client.h
         src/client.c
+        src/frame.h
+        src/murmur3.c
+        src/murmur3.h
+        src/crc32c.h
+        src/crc32c.c
+        src/uuid.h
+        src/uuid.c
+        src/frame.c
+        src/bytes.h
 )
 
 target_link_libraries(racs_client ${MSGPACK_LIBRARIES})

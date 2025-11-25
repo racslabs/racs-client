@@ -209,9 +209,10 @@ racs_result *racs_unpack_list(msgpack_object *obj) {
                 ((racs_result **) result->data)[i] = r;
             }
                 break;
-            case MSGPACK_OBJECT_STR:
+            case MSGPACK_OBJECT_STR: {
                 racs_result *r = racs_unpack_str(obj, i + 1);
                 ((racs_result **) result->data)[i] = r;
+            }
                 break;
             default:
                 perror("Invalid element type");

@@ -4,6 +4,7 @@
 
 #include "socket.h"
 #include "unpack.h"
+#include <uuid/uuid.h>
 
 typedef struct {
     racs_conn conn;

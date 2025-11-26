@@ -10,7 +10,10 @@ set(RACS_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 find_package(Msgpack)
-find_package(UUID)
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    find_package(UUID)
+endif ()
 
 include_directories(
         ${MSGPACK_INCLUDE_DIRS}

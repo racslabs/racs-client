@@ -37,7 +37,7 @@ unsigned char *read_file(const char *path, size_t *out_size) {
 }
 
 int main(void) {
-    racs_client *client = racs_client_open("localhost", 6381);
+    racs_client *client = racs_client_open("10.0.0.75", 6381);
 
     racs_result *res = racs_client_execute(client,
         "EXTRACT 'chopin' 2023-12-25T22:30:45.123Z 2026-05-27T02:56:16.123Z |>"

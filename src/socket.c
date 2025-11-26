@@ -2,6 +2,7 @@
 
 void racs_conn_open(racs_conn *conn, const char *host, int port) {
     racs_conn_init_socket(conn);
+    racs_conn_setsockopt(conn);
     racs_conn_connect(conn, host, port);
 }
 
@@ -10,6 +11,28 @@ void racs_conn_init_socket(racs_conn *conn) {
     if (conn->fd < 0) {
         perror("socket");
     }
+}
+
+void racs_conn_setsockopt(racs_conn *conn) {
+    int on = 1, rc;
+    int size = 1024 * 1024; // 1MB
+
+    rc = setsockopt(conn->fd, IPPROTO_TCP, TCP_NODELAY, &on, sizeof(on));
+    if (rc < 0)
+        perror("setsockopt(TCP_NODELAY) failed");
+
+    rc = setsockopt(conn->fd, SOL_SOCKET, SO_SNDBUF, &size, sizeof(size));
+    if (rc < 0)
+        perror("setsockopt(SO_SNDBUF) failed");
+
+    rc = setsockopt(conn->fd, SOL_SOCKET, SO_RCVBUF, &size, sizeof(size));
+    if (rc < 0)
+        perror("setsockopt(SO_RCVBUF) failed");
+
+    struct linger ling = {0};
+    rc = setsockopt(conn->fd, SOL_SOCKET, SO_LINGER, &ling, sizeof(ling));
+    if (rc < 0)
+        perror("setsockopt(SO_LINGER) failed");
 }
 
 void racs_conn_connect(racs_conn *conn, const char *host, int port) {

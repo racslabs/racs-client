@@ -39,12 +39,6 @@ void racs_stream(racs_conn *conn, const char *stream_id, racs_uint16 chunk_size,
 
         free(pcm_block);
     }
-
-    racs_uint8 *pcm_block = racs_pack(data + i, bit_depth, size - n);
-    racs_frame_set_block(&frame, pcm_block, (size - n) * (bit_depth / 8));
-
-    racs_send_frame(conn, &frame);
-    free(pcm_block);
 }
 
 void *racs_pack(racs_int32 *data, racs_uint16 bit_depth, size_t n) {

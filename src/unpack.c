@@ -30,6 +30,8 @@ racs_result *racs_unpack_err(msgpack_object *obj) {
     snprintf(result->data, result->size, "%s", obj->via.array.ptr[1].via.str.ptr);
     result->type = RACS_TYPE_ERROR;
 
+    perror(result->data);
+
     return result;
 }
 

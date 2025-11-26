@@ -1,7 +1,5 @@
 #include "client.h"
 
-#include "stream.h"
-
 racs_client *racs_client_open(const char *host, int port) {
     racs_client *client = malloc(sizeof(racs_client));
 

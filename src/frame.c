@@ -22,7 +22,7 @@ void racs_frame_set_block(racs_frame *frame, racs_uint8 *block, racs_uint16 size
 }
 
 racs_uint8 *racs_frame_write(racs_frame *frame) {
-    racs_uint8 *buf = malloc(sizeof(racs_frame_header) + frame->header.block_size);
+    racs_uint8 *buf = malloc(34 + frame->header.block_size);
 
     memcpy(buf, frame->header.chunk_id, 3);
     memcpy(buf + 3, frame->header.session_id, 16);
@@ -32,7 +32,7 @@ racs_uint8 *racs_frame_write(racs_frame *frame) {
     racs_write_uint16(buf, frame->header.block_size, 31);
 
     buf[33] = 0;
-    memcpy(buf + 34, frame->pcm_block, 16);
+    memcpy(buf + 34, frame->pcm_block, frame->header.block_size);
 
     return buf;
 }

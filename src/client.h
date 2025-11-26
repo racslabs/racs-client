@@ -3,6 +3,7 @@
 #define RACS_CLIENT_H
 
 #include "frame.h"
+#include "stream.h"
 
 typedef struct {
     racs_conn conn;

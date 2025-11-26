@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
+#include <netinet/tcp.h>
 #include "memory.h"
 
 typedef struct {
@@ -19,6 +20,8 @@ void racs_conn_open(racs_conn *conn, const char *host, int port);
 void racs_conn_init_socket(racs_conn *conn);
 
 void racs_conn_connect(racs_conn *conn, const char *host, int port);
+
+void racs_conn_setsockopt(racs_conn *conn);
 
 size_t racs_send(racs_conn *conn, const char *data, size_t size);
 

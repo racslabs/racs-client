@@ -2,22 +2,13 @@
 #ifndef RACS_CONN_H
 #define RACS_CONN_H
 
-#if defined(_WIN32) || defined(__CYGWIN__)
-    #include <winsock2.h>
-    #include <ws2tcpip.h>
-
-    #pragma comment(lib, "ws2_32.lib")
-#else
-    #include <arpa/inet.h>
-    #include <sys/socket.h>
-    #include <netinet/tcp.h>
-    #include <netdb.h>
-#endif
-
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <netinet/tcp.h>
+#include <netdb.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-
 #include "memory.h"
 
 typedef struct {

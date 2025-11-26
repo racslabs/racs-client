@@ -40,8 +40,8 @@ int main(void) {
     racs_client *client = racs_client_open("localhost", 6381);
 
     racs_result *res = racs_client_execute(client,
-        "EXTRACT 'chopin' 2023-12-25T22:30:45.123Z 2026-05-27T02:56:16.123Z "
-        "|> FORMAT 'audio/wav' 44100 2 16");
+        "EXTRACT 'chopin' 2023-12-25T22:30:45.123Z 2026-05-27T02:56:16.123Z |>"
+        "FORMAT 'audio/wav' 44100 2 16");
 
     FILE *fp = fopen("chopin.wav", "wb");
     fwrite(res->data, 1, res->size, fp);
@@ -59,8 +59,8 @@ int main(void) {
     // racs_int32 *_data = racs_s16_s32((racs_int16 *)data, size / 2);
     //
     // racs_client_stream(client, "chopin", 1024 * 32, _data, size / 2);
-
-    racs_client_close(client);
+    //
+    // racs_client_close(client);
 
     return 0;
 }

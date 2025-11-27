@@ -48,7 +48,7 @@ racs_result_destory(result);
 racs_client_close(client);
 ```
 
-For the full list of supported commands, refer to the documentation in [RACS](https://github.com/racslabs/racs) for the commands.
+For the full list of supported commands, refer to the documentation in [RACS](https://github.com/racslabs/racs).
 
 ### Streaming
 

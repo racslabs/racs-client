@@ -50,7 +50,8 @@ racs_client_close(client);
 
 For the full list of supported commands, refer to the documentation in [RACS](https://github.com/racslabs/racs) for the commands.
 
-``racs_client_execute`` always returns a racs_result structure:
+## Understanding ``racs_result``
+``racs_client_execute`` always returns a ``racs_result`` structure:
 
 ```c++
 typedef struct {

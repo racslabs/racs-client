@@ -2,6 +2,10 @@
 #ifndef RACS_UNPACK_H
 #define RACS_UNPACK_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <msgpack.h>
 #include "types.h"
 
@@ -66,5 +70,9 @@ racs_result *racs_unpack_c64v(msgpack_object *obj);
 char *racs_unpack_type(msgpack_object *obj);
 
 void racs_result_destroy(racs_result *result);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //RACS_UNPACK_H

@@ -2,6 +2,10 @@
 #ifndef RACS_FRAME_H
 #define RACS_FRAME_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "uuid.h"
 #include "murmur3.h"
 #include "crc32c.h"
@@ -33,5 +37,9 @@ void racs_frame_set_block(racs_frame *frame, racs_uint8 *block, racs_uint16 size
 racs_uint8 *racs_frame_write(racs_frame *frame);
 
 void racs_send_frame(racs_conn *conn, racs_frame *frame);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //RACS_FRAME_H

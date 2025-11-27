@@ -2,6 +2,11 @@
 #ifndef RACS_CONN_H
 #define RACS_CONN_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/tcp.h>
@@ -30,5 +35,9 @@ size_t racs_recv(racs_conn *conn, racs_memstream *memstream, size_t len);
 void racs_len_prefix(const racs_conn *conn, size_t *len);
 
 void racs_conn_close(racs_conn *conn);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //RACS_CONN_H

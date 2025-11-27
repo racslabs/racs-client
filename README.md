@@ -100,13 +100,13 @@ racs_client *client = racs_client_open("localhost", 6381);
 racs_result *result = racs_client_execute(client, 
     "EXTRACT 'Beethoven Piano Sonata No.1' 2025-11-26T22:30:45.123Z 2025-11-27T02:56:16.123Z |> "
     "FORMAT 'audio/mp3' 44100 2 16");
-racs_result_destory(result);
 
 if (result->type == RACS_TYPE_U8VEC) {
     // Get MP3 bytes
     racs_uint8 *data = (racs_uint8 *) result->data;
 }
 
+racs_result_destory(result);
 racs_client_close(client);
 ```
 

@@ -35,7 +35,7 @@ target_link_libraries(racs
 )
 
 install(FILES ${RACS_INCLUDE_FILES}
-        DESTINATION include)
+        DESTINATION include/racs)
 install(TARGETS racs
         ARCHIVE DESTINATION lib
         PUBLIC_HEADER DESTINATION include

@@ -29,7 +29,7 @@ cmake --install .
 Use ``racs_client_open`` and ``racs_client_close`` to create and close a connection:
 
 ```c++
-#include <client.h>
+#include <racs/client.h>
 
 racs_client *client = racs_client_open("localhost", 6381);
 racs_client_close(client);
@@ -38,7 +38,7 @@ racs_client_close(client);
 To run a command, use ``racs_client_execute``:
 
 ```c++
-#include <client.h>
+#include <racs/client.h>
 
 racs_client *client = racs_client_open("localhost", 6381);
 
@@ -49,6 +49,42 @@ racs_client_close(client);
 ```
 
 For the full list of supported commands, refer to the documentation in [RACS](https://github.com/racslabs/racs) for the commands.
+
+### Streaming
+
+In the below example, a new audio stream is created and opened. Then PCM data is chunked into frames
+and streamed to the RACS server using ``racs_client_stream``.
+
+```c++
+#include <racs/client.h>
+
+// open connection to RACS server
+racs_client *client = racs_client_open("localhost", 6381);
+
+// Create a new stream
+racs_result *result = racs_client_execute(client, "CREATE 'Beethoven Piano Sonata No.1' 44100 2 16");
+racs_result_destory(result);
+
+// Open the stream
+racs_result *result = racs_client_execute(client, "OPEN 'Beethoven Piano Sonata No.1'");
+racs_result_destory(result);
+
+// Prepare PCM samples (interleaved L/R, 16- or 24-bit integers)
+racs_int32 *data = /** the PCM data **/;
+
+// Total number of PCM samples (includes both channels)
+size_t data_size = /** ... **/;
+
+// Chunk size (32 MB)
+racs_int16 chunk_size = 1024 * 32;
+
+// Stream PCM data to RACS server
+racs_client_stream(client, "Beethoven Piano Sonata No.1", chunk_size, data, data_size);
+
+// Close stream when finished
+racs_result *result = racs_client_execute(client, "CLOSE 'Beethoven Piano Sonata No.1'");
+racs_result_destory(result);
+```
 
 ## Understanding ``racs_result``
 ``racs_client_execute`` always returns a ``racs_result`` structure:

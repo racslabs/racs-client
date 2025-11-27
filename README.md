@@ -15,7 +15,7 @@
 
 ## Installation
 
-Build and install **racs-client** using CMake:
+Build and install racs-client using CMake:
 
 ```bash
 git clone --branch main https://github.com/racslabs/racs-client.git && cd racs-client

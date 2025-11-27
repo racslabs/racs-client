@@ -65,12 +65,12 @@ Use the table below to correctly interpret the result:
 | racs_type          | void *data points to     |
 |--------------------|--------------------------|
 | `RACS_TYPE_STR`    | `char *`                 |
-| `RACS_TYPE_INT`    | `int *`                  |
+| `RACS_TYPE_INT`    | `racs_int64 *`           |
 | `RACS_TYPE_FLOAT`  | `float *`                |
 | `RACS_TYPE_LIST`   | `racs_result **`         |
 | `RACS_TYPE_NULL`   | `NULL`                   |
 | `RACS_TYPE_ERROR`  | `char *` (error message) |
-| `RACS_TYPE_BOOL`   | `bool *` or `uint8_t *`  |
+| `RACS_TYPE_BOOL`   | `bool *`                 |
 | `RACS_TYPE_U8VEC`  | `racs_uint8 *`           |
 | `RACS_TYPE_S8VEC`  | `racs_int8 *`            |
 | `RACS_TYPE_U16VEC` | `racs_uint16 *`          |

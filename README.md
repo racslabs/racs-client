@@ -61,12 +61,9 @@ and streamed to the RACS server using ``racs_client_stream``.
 // open connection to RACS server
 racs_client *client = racs_client_open("localhost", 6381);
 
-// Create a new stream
-racs_result *result = racs_client_execute(client, "CREATE 'Beethoven Piano Sonata No.1' 44100 2 16");
-racs_result_destory(result);
-
-// Open the stream
-racs_result *result = racs_client_execute(client, "OPEN 'Beethoven Piano Sonata No.1'");
+// Create and open new stream
+racs_result *result = racs_client_execute(client, "CREATE 'Beethoven Piano Sonata No.1' 44100 2 16 |> "
+                                                  "OPEN 'Beethoven Piano Sonata No.1'");
 racs_result_destory(result);
 
 // Prepare PCM samples (interleaved L/R, 16- or 24-bit integers)
@@ -84,6 +81,33 @@ racs_client_stream(client, "Beethoven Piano Sonata No.1", chunk_size, data, data
 // Close stream when finished
 racs_result *result = racs_client_execute(client, "CLOSE 'Beethoven Piano Sonata No.1'");
 racs_result_destory(result);
+
+// Close connection to RACS server
+racs_client_close(client);
+```
+
+### Extracting and Formating
+The below example extracts an audio segment based on the given range.
+It then converts the extracted PCM data into MP3 format.
+
+```c++
+#include <racs/client.h>
+
+// open connection to RACS server
+racs_client *client = racs_client_open("localhost", 6381);
+
+// Extract and format PCM data to MP3
+racs_result *result = racs_client_execute(client, 
+    "EXTRACT 'Beethoven Piano Sonata No.1' 2025-11-26T22:30:45.123Z 2025-11-27T02:56:16.123Z |> "
+    "FORMAT 'audio/mp3' 44100 2 16");
+racs_result_destory(result);
+
+if (result->type == RACS_TYPE_U8VEC) {
+    // Get MP3 bytes
+    racs_uint8 *data = (racs_uint8 *) result->data;
+}
+
+racs_client_close(client);
 ```
 
 ## Understanding ``racs_result``

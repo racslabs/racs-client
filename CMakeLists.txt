@@ -20,32 +20,23 @@ include_directories(
         ${UUID_INCLUDE_DIRS}
 )
 
-add_executable(racs_client main.c
-        src/socket.h
-        src/socket.c
-        src/memory.h
-        src/memory.c
-        src/types.h
-        src/types.c
-        src/export.h
-        src/unpack.h
-        src/unpack.c
-        src/client.h
-        src/client.c
-        src/frame.h
-        src/murmur3.c
-        src/murmur3.h
-        src/crc32c.h
-        src/crc32c.c
-        src/uuid.h
-        src/uuid.c
-        src/frame.c
-        src/bytes.h
-        src/stream.h
-        src/stream.c
+file(GLOB_RECURSE RACS_TEST_FILES CONFIGURE_DEPENDS ${RACS_TEST_DIR}/*.hpp ${RACS_TEST_DIR}/*.cpp)
+file(GLOB_RECURSE RACS_SOURCE_FILES CONFIGURE_DEPENDS ${RACS_SOURCE_DIR}/*.c)
+file(GLOB_RECURSE RACS_INCLUDE_FILES CONFIGURE_DEPENDS ${RACS_SOURCE_DIR}/*.h)
+
+add_library(racs STATIC
+        ${RACS_SOURCE_FILES}
+        ${RACS_INCLUDE_FILES}
 )
 
-target_link_libraries(racs_client
+target_link_libraries(racs
         ${MSGPACK_LIBRARIES}
         ${UUID_LIBRARIES}
+)
+
+install(FILES ${RACS_INCLUDE_FILES}
+        DESTINATION include)
+install(TARGETS racs
+        ARCHIVE DESTINATION lib
+        PUBLIC_HEADER DESTINATION include
 )

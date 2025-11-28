@@ -284,6 +284,7 @@ void racs_result_destroy(racs_result *result) {
         case RACS_TYPE_F32VEC:
         case RACS_TYPE_C64VEC:
             free(result->data);
+            free(result);
             break;
         case RACS_TYPE_LIST: {
             racs_result ** r = result->data;
@@ -292,6 +293,7 @@ void racs_result_destroy(racs_result *result) {
                 racs_result_destroy(r[i]);
 
             free(result->data);
+            free(result);
         }
             break;
         case RACS_TYPE_NULL:
